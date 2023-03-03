@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase storgae</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+     <div>FOTA</div>
+    <input type="file" id="inp" multiple>
+    <div>
+      <button class="button-29" role="button" id="but">Upload</button>
+    </div>
+    <script type="module">
+        
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+        import { getStorage,ref, uploadBytes } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-storage.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyBRLVxz8mWs3cTkZiChXLglEiIwb3EIKMI",
+          authDomain: "nodemcu-5ffde.firebaseapp.com",
+          projectId: "nodemcu-5ffde",
+          storageBucket: "nodemcu-5ffde.appspot.com",
+          messagingSenderId: "745436601082",
+          appId: "1:745436601082:web:3a9a1cd309c0cec4648743",
+          measurementId: "G-X6TWR49XM9"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage(app);
+        document.getElementById("but").addEventListener('click',function(){
+           var file=document.getElementById("inp").files[0]
+            const storage = getStorage();
+          //  var storageRef = ref(storage, 'files/'+file.name);
+            var storageRef = ref(storage, 'FOTA');
+         //   storageRef.put(file);
+             // 'file' comes from the Blob or File API
+             uploadBytes(storageRef, file).then((snapshot) => {
+               console.log('Uploaded a blob or file!');
+              });
+        })
+
+      </script>
+
+
+</body>
+</html>
